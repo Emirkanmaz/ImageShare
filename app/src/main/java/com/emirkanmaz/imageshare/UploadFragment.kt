@@ -10,7 +10,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +18,7 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.emirkanmaz.imageshare.databinding.FragmentUploadBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -27,6 +27,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import java.io.ByteArrayOutputStream
+import java.util.UUID
 
 class UploadFragment : Fragment() {
     private var _binding: FragmentUploadBinding? = null
@@ -73,7 +74,26 @@ class UploadFragment : Fragment() {
     }
 
     private fun postImage(view: View?) {
-        TODO("Not yet implemented")
+        val uuid = UUID.randomUUID()
+        val reference = storage.reference
+        val imageReference = reference.child("images").child("$uuid.jpg")
+        if(selectedImage != null){
+            imageReference.putFile(selectedImage!!).addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    imageReference.downloadUrl.addOnSuccessListener { uri ->
+                        val downloadUrl = uri.toString()
+                        //todo: firestore kayıt
+                    }
+                    Toast.makeText(requireContext(), "Successful", Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        task.exception?.localizedMessage.toString(),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+            }
+        }
     }
 
     override fun onDestroy() {
