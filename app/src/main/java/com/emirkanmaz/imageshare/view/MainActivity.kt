@@ -1,10 +1,11 @@
-package com.emirkanmaz.imageshare
+package com.emirkanmaz.imageshare.view
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.emirkanmaz.imageshare.R
 import com.emirkanmaz.imageshare.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {

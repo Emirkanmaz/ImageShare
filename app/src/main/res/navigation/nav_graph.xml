@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.emirkanmaz.imageshare.SignupFragment"
+        android:name="com.emirkanmaz.imageshare.view.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/feedFragment"
-        android:name="com.emirkanmaz.imageshare.FeedFragment"
+        android:name="com.emirkanmaz.imageshare.view.FeedFragment"
         android:label="fragment_feed"
         tools:layout="@layout/fragment_feed" >
         <action
@@ -29,7 +29,7 @@
     </fragment>
     <fragment
         android:id="@+id/uploadFragment"
-        android:name="com.emirkanmaz.imageshare.UploadFragment"
+        android:name="com.emirkanmaz.imageshare.view.UploadFragment"
         android:label="fragment_upload"
         tools:layout="@layout/fragment_upload" >
         <action

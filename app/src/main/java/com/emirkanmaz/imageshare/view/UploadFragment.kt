@@ -1,4 +1,4 @@
-package com.emirkanmaz.imageshare
+package com.emirkanmaz.imageshare.view
 
 import android.Manifest
 import android.content.Intent
@@ -79,8 +79,8 @@ class UploadFragment : Fragment() {
         binding.postButton.setOnClickListener { postImage(it) }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 
@@ -108,7 +108,8 @@ class UploadFragment : Fragment() {
                         val postMap = hashMapOf(
                             "imageUrl" to imageUrl,
                             "timestamp" to Timestamp.now(),
-                            "comment" to binding.descriptionEditText.text.toString()
+                            "comment" to binding.descriptionEditText.text.toString(),
+                            "email" to auth.currentUser!!.email.toString()
                         )
 
                         userDocRef.collection("posts").add(postMap).addOnSuccessListener {

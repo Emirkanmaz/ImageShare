@@ -1,4 +1,4 @@
-package com.emirkanmaz.imageshare
+package com.emirkanmaz.imageshare.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.NavOptions
 import androidx.navigation.Navigation
+import com.emirkanmaz.imageshare.R
 import com.emirkanmaz.imageshare.databinding.FragmentSignupBinding
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
@@ -42,14 +44,14 @@ class SignupFragment : Fragment() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             val action = SignupFragmentDirections.actionSignupFragmentToFeedFragment()
-            Navigation.findNavController(view).navigate(action)
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.signupFragment, true)
+                .build()
+            Navigation.findNavController(view).navigate(action, navOptions)
         }
-
 
         binding.signupButton.setOnClickListener { signup(it) }
         binding.signinButton.setOnClickListener { signin(it) }
-
-
     }
 
     private fun signup(view: View) {
@@ -63,13 +65,15 @@ class SignupFragment : Fragment() {
                         "email" to auth.currentUser!!.email.toString(),
                         "createdAt" to Timestamp.now()
                     )
-
                     db.collection("users").document(auth.currentUser!!.uid).set(userMap)
                         .addOnSuccessListener {
                             Toast.makeText(requireContext(), "Signup Successful", Toast.LENGTH_LONG).show()
 
                             val action = SignupFragmentDirections.actionSignupFragmentToFeedFragment()
-                            Navigation.findNavController(view).navigate(action)
+                            val navOptions = NavOptions.Builder()
+                                .setPopUpTo(R.id.signupFragment, true)
+                                .build()
+                            Navigation.findNavController(view).navigate(action, navOptions)
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(requireContext(), e.localizedMessage, Toast.LENGTH_SHORT).show()
@@ -92,7 +96,10 @@ class SignupFragment : Fragment() {
                 if (task.isSuccessful) {
                     Toast.makeText(requireContext(), "Signin Successful", Toast.LENGTH_LONG).show()
                     val action = SignupFragmentDirections.actionSignupFragmentToFeedFragment()
-                    Navigation.findNavController(view).navigate(action)
+                    val navOptions = NavOptions.Builder()
+                        .setPopUpTo(R.id.signupFragment, true)
+                        .build()
+                    Navigation.findNavController(view).navigate(action, navOptions)
                 } else {
                     Toast.makeText(
                         requireContext(),
@@ -104,8 +111,8 @@ class SignupFragment : Fragment() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    override fun onDestroyView() {
+        super.onDestroyView()
         _binding = null
     }
 }
