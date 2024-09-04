@@ -70,7 +70,6 @@ class UploadFragment : Fragment() {
         }
         binding.uploadImageView.setOnClickListener { selectImage(it) }
         binding.postButton.setOnClickListener { postImage(it) }
-        storage.reference.
     }
 
     private fun postImage(view: View?) {
