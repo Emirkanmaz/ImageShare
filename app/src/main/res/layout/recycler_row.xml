@@ -13,21 +13,18 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <!-- Resim -->
         <ImageView
             android:id="@+id/feedImageView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-        <!-- İçerik Alanı -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Başlık ve Zaman Damgası -->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -57,7 +54,6 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <!-- Açıklama -->
             <TextView
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
