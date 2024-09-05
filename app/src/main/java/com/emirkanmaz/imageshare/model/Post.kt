@@ -5,7 +5,4 @@ data class Post(
     val imageUrl: String = "",
     val comment: String = "",
     val timestamp: com.google.firebase.Timestamp? = null
-) {
-    // Varsayılan yapıcı
-    constructor() : this("", "", "", null)
-}
+)
